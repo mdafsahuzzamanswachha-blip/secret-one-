@@ -6,6 +6,7 @@ import CONFIG from './config.js';
 import { $, applyThemeTokens } from './utils.js';
 import { ParticleEngine } from './particles.js';
 import { AudioController } from './audio.js';
+import { initScrollAnimations } from './animations.js';
 
 "use strict";
 
@@ -21,8 +22,9 @@ class App {
     // 1. Inject Theme Tokens into CSS :root
     applyThemeTokens(CONFIG.theme);
 
-    // 2. Hydrate Hero Content
+    // 2. Hydrate Hero & Story Sections
     this.hydrateHero();
+    this.hydrateStories();
 
     // 3. Initialize Particle Engine
     if (CONFIG.settings.enableParticles) {
@@ -49,8 +51,9 @@ class App {
       this.hideLoaderAndRevealApp();
     }
 
-    // 6. Bind CTA Interactions
+    // 6. Bind CTA Interactions & Scroll Animations
     this.bindEvents();
+    initScrollAnimations();
   }
 
   hydrateHero() {
@@ -63,6 +66,19 @@ class App {
     if (title) title.textContent = `${CONFIG.hero.title} ${CONFIG.recipientName}!`;
     if (subtitle) subtitle.textContent = CONFIG.hero.subtitle;
     if (cta) cta.textContent = CONFIG.hero.ctaButton;
+  }
+
+  hydrateStories() {
+    const container = $('#story-container');
+    if (!container || !CONFIG.stories) return;
+
+    container.innerHTML = CONFIG.stories.map((story) => `
+      <article class="story-card">
+        <span class="story-chapter">${story.chapter}</span>
+        <h3 class="story-title">${story.title}</h3>
+        <p class="story-text">${story.text}</p>
+      </article>
+    `).join('');
   }
 
   setupAudioControls() {
@@ -134,7 +150,6 @@ class App {
 
     if (ctaBtn) {
       ctaBtn.addEventListener('click', async () => {
-        // Trigger audio playback upon user interaction
         if (this.audioController && !this.audioController.isPlaying) {
           const audioBtn = $('#audio-toggle-btn');
           const isPlaying = await this.audioController.togglePlay();
@@ -144,7 +159,6 @@ class App {
           }
         }
 
-        // Smooth scroll to the Story section
         const storySection = $('#story');
         if (storySection) {
           storySection.scrollIntoView({ behavior: 'smooth' });
@@ -154,7 +168,6 @@ class App {
   }
 }
 
-// Instantiate ES Module
 document.addEventListener('DOMContentLoaded', () => {
   new App();
 });
