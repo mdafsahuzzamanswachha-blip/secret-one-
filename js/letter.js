@@ -81,12 +81,13 @@ function createLetterScreen() {
 async function startLetterTyping() {
 
     const box = document.getElementById("letterBox");
-
     const button = document.getElementById("letterNext");
 
     box.innerHTML = "";
 
     await delay(1200);
+
+    let content = "";
 
     for (let i = 0; i < LETTER_TEXT.length; i++) {
 
@@ -94,42 +95,25 @@ async function startLetterTyping() {
 
         if (char === "\n") {
 
-    box.innerHTML += "<br>";
+            content += "<br>";
 
-}
+        } else {
 
-        else {
-
-            box.innerHTML += char;
+            content += char;
 
         }
 
-        box.innerHTML += '<span id="cursor">|</span>';
-
-        const cursor = document.getElementById("cursor");
-
-        if (cursor) {
-
-            cursor.remove();
-
-        }
+        box.innerHTML = content + '<span id="cursor">|</span>';
 
         box.scrollTop = box.scrollHeight;
-
-        window.scrollTo({
-
-            top: document.body.scrollHeight,
-
-            behavior: "smooth"
-
-        });
 
         await delay(getTypingSpeed(char));
 
     }
 
-    button.style.display = "block";
+    box.innerHTML = content;
 
+    button.style.display = "block";
     button.classList.add("fade-in");
 
 }
