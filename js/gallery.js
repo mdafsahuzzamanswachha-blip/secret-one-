@@ -55,98 +55,80 @@ function renderGallery() {
 
     );
 
-    // বাকি Code যেমন আছে তেমনই থাকবে...
-}
+  image.style.width = "100%";
+image.style.borderRadius = "20px";
+image.style.objectFit = "cover";
+image.style.margin = "15px 0";
 
-    image.style.width = "100%";
-    image.style.borderRadius = "20px";
-    image.style.objectFit = "cover";
-    image.style.margin = "15px 0";
+fadeInElement(image);
 
-    fadeInElement(image);
+const counter = createParagraph(
 
-    const counter = createParagraph(
+    `${galleryIndex + 1} / ${CONFIG.gallery.length}`
 
-        `${galleryIndex + 1} / ${CONFIG.gallery.length}`
+);
 
-    );
+const controls = createElement("div");
 
-    const controls = createElement("div");
+controls.style.display = "flex";
+controls.style.gap = "12px";
+controls.style.width = "100%";
 
-    controls.style.display = "flex";
-    controls.style.gap = "12px";
-    controls.style.width = "100%";
+const previousButton = createButton(
 
-    const previousButton = createButton(
+    "⬅ আগেরটি",
 
-        "⬅ আগেরটি",
+    previousImage
 
-        previousImage
+);
 
-    );
+const nextButton = createButton(
 
-    const nextButton = createButton(
+    galleryIndex === CONFIG.gallery.length - 1
+        ? "🎉 শেষ চমক দেখা যাক"
+        : "পরেরটি ➜",
 
-        galleryIndex === CONFIG.gallery.length - 1
+    () => {
 
-            ? "শেষ"
+        if (galleryIndex === CONFIG.gallery.length - 1) {
 
-            : "পরেরটি ➜",
-
-        () => {
-
-            if (
-
-                galleryIndex ===
-
-                CONFIG.gallery.length - 1
-
-            ) {
-
-                finishExperience();
-
-                return;
-
-            }
-
-            nextImage();
+            finishExperience();
+            return;
 
         }
 
-    );
-
-    controls.append(
-
-        previousButton,
-
-        nextButton
-
-    );
-
-    if (galleryIndex === 0) {
-
-        previousButton.disabled = true;
+        nextImage();
 
     }
 
-    screen.append(
+);
 
-        title,
+controls.append(
 
-        image,
+    previousButton,
+    nextButton
 
-        caption,
+);
 
-        counter,
+if (galleryIndex === 0) {
 
-        controls
-
-    );
-
-    renderScreen(screen);
+    previousButton.disabled = true;
 
 }
 
+screen.append(
+
+    title,
+    image,
+    caption,
+    counter,
+    controls
+
+);
+
+renderScreen(screen);
+
+}
 
 /* ==========================================================
    NEXT IMAGE
