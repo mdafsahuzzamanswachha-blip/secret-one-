@@ -74,7 +74,7 @@ function renderGallery() {
 
             if (galleryIndex === CONFIG.gallery.length - 1) {
 
-                finishExperience();
+                showFinalEnding();
                 return;
 
             }
