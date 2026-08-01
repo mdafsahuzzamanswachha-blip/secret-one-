@@ -1,123 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <meta name="theme-color" content="#09090e" />
-  <title>A Special Birthday Gift ✨</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <link rel="stylesheet" href="css/styles.css" />
+    <meta name="theme-color" content="#050505">
+
+    <meta name="description"
+          content="A secret birthday experience.">
+
+    <title>Secret One</title>
+
+    <!-- Google Font -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet"
+          href="css/styles.css">
+
 </head>
+
 <body>
 
-  <canvas id="ambient-particles" aria-hidden="true"></canvas>
+    <!-- ========================================================= -->
+    <!-- APP ROOT (Everything will be generated from JavaScript) -->
+    <!-- ========================================================= -->
 
-  <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    <div id="app"></div>
 
-  <div id="audio-control-wrapper" class="audio-control-wrapper">
-    <button id="audio-toggle-btn" class="audio-btn" aria-label="Toggle Background Music" type="button">
-      <span class="audio-icon-muted">🔇</span>
-      <span class="audio-icon-playing hidden">🎵</span>
-    </button>
-  </div>
+    <!-- ========================================================= -->
+    <!-- LOADER -->
+    <!-- ========================================================= -->
 
-  <audio id="bg-music" loop preload="auto"></audio>
+    <div id="global-loader">
 
-  <aside id="loader" class="loader-screen" aria-live="polite">
-    <div class="loader-content">
-      <div class="loader-ring"></div>
-      <p id="loader-status" class="loader-status">Preparing something special...</p>
-      <div class="loader-bar-bg">
-        <div id="loader-bar-fill" class="loader-bar-fill"></div>
-      </div>
-      <span id="loader-percentage" class="loader-percentage">0%</span>
+        <div class="loader-circle"></div>
+
     </div>
-  </aside>
 
-  <main id="app-main" class="app-main hidden">
+    <!-- ========================================================= -->
+    <!-- AUDIO -->
+    <!-- ========================================================= -->
 
-    <section id="hero" class="section hero-section">
-      <div class="container hero-container">
-        <span id="hero-badge" class="hero-badge"></span>
-        <h1 id="hero-title" class="hero-title"></h1>
-        <p id="hero-subtitle" class="hero-subtitle"></p>
-        <button id="hero-cta-btn" class="btn btn-primary hero-cta" type="button"></button>
-      </div>
-    </section>
+    <audio id="bgMusic"
+           preload="auto"
+           loop>
 
-    <section id="story" class="section story-section">
-      <div id="story-container" class="container story-container"></div>
-    </section>
+        <source src="assets/audio/background.mp3"
+                type="audio/mpeg">
 
-    <section id="timeline" class="section timeline-section">
-      <div class="container">
-        <h2 id="timeline-heading" class="section-heading"></h2>
-        <div id="timeline-container" class="timeline-container"></div>
-      </div>
-    </section>
+    </audio>
 
-    <section id="gallery" class="section gallery-section">
-      <div class="container">
-        <h2 id="gallery-heading" class="section-heading"></h2>
-        <div id="gallery-container" class="gallery-grid"></div>
-      </div>
-    </section>
+    <!-- ========================================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================================================= -->
 
-    <section id="celebration" class="section celebration-section">
-      <div class="container celebration-container">
-        <h2 id="celebration-title" class="section-heading"></h2>
-        <p id="celebration-instruction" class="celebration-instruction"></p>
-        <div id="cake-wrapper" class="cake-wrapper" role="button" tabindex="0" aria-label="Tap to blow out candles">
-          <div class="candles-group">
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-          </div>
-          <div class="cake-body"></div>
-        </div>
-        <p id="celebration-wish" class="celebration-wish hidden"></p>
-      </div>
-    </section>
+    <script src="js/config.js"></script>
 
-    <section id="letter" class="section letter-section">
-      <div class="container letter-container">
-        <div class="glass-card letter-card">
-          <h2 id="letter-title" class="letter-title"></h2>
-          <p id="letter-greeting" class="letter-greeting"></p>
-          <div id="letter-body" class="letter-body"></div>
-          <div class="letter-footer">
-            <p id="letter-closing" class="letter-closing"></p>
-            <p id="letter-signature" class="letter-signature"></p>
-          </div>
-        </div>
-        <button id="final-surprise-btn" class="btn btn-secondary final-cta" type="button"></button>
-      </div>
-    </section>
+    <script src="js/utils.js"></script>
 
-  </main>
+    <script src="js/animations.js"></script>
 
-  <dialog id="gallery-lightbox" class="lightbox-modal">
-    <button id="lightbox-close" class="lightbox-close-btn" aria-label="Close Lightbox" type="button">&times;</button>
-    <img id="lightbox-img" src="" alt="" />
-    <p id="lightbox-caption" class="lightbox-caption"></p>
-  </dialog>
+    <script src="js/audio.js"></script>
 
-  <dialog id="final-modal" class="final-modal">
-    <div class="glass-card final-modal-card">
-      <button id="final-modal-close" class="final-modal-close-btn" aria-label="Close Modal" type="button">&times;</button>
-      <blockquote id="final-quote" class="final-quote"></blockquote>
-      <a id="whatsapp-reply-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary whatsapp-btn">
-        Send Thank You Message 💬
-      </a>
-    </div>
-  </dialog>
+    <script src="js/particles.js"></script>
 
-  <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
+    <script src="js/timeline.js"></script>
 
-  <script type="module" src="js/app.js"></script>
+    <script src="js/gallery.js"></script>
+
+    <script src="js/celebration.js"></script>
+
+    <script src="js/app.js"></script>
+
 </body>
+
 </html>
