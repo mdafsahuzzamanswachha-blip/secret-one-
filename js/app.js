@@ -1,173 +1,671 @@
-/**
- * Main Orchestrator ES Module
- * @module app
- */
-import CONFIG from './config.js';
-import { $, applyThemeTokens } from './utils.js';
-import { ParticleEngine } from './particles.js';
-import { AudioController } from './audio.js';
-import { initScrollAnimations } from './animations.js';
-
 "use strict";
 
-class App {
-  constructor() {
-    this.particleEngine = null;
-    this.audioController = null;
+/* ==========================================================
+   SECRET ONE
+   App Engine
+   Part 1
+========================================================== */
 
-    this.init();
-  }
+let currentQuestion = 0;
 
-  init() {
-    // 1. Inject Theme Tokens into CSS :root
-    applyThemeTokens(CONFIG.theme);
+let answers = [];
 
-    // 2. Hydrate Hero & Story Sections
-    this.hydrateHero();
-    this.hydrateStories();
+/* ==========================================================
+   INITIALIZE
+========================================================== */
 
-    // 3. Initialize Particle Engine
-    if (CONFIG.settings.enableParticles) {
-      this.particleEngine = new ParticleEngine('ambient-particles', CONFIG.theme);
-    }
+ready(async () => {
 
-    // 4. Initialize Audio Controller
-    if (CONFIG.settings.enableMusic) {
-      this.audioController = new AudioController('bg-music', CONFIG.music);
-      
-      if (CONFIG.music.syncWithAnimations && this.particleEngine) {
-        this.audioController.onEnergyUpdate = (energy) => {
-          this.particleEngine.setAudioEnergy(energy);
-        };
-      }
+    initializeApp();
 
-      this.setupAudioControls();
-    }
+});
 
-    // 5. Run Loader sequence or immediately reveal Hero
-    if (CONFIG.settings.enableLoader) {
-      this.runLoaderSequence();
-    } else {
-      this.hideLoaderAndRevealApp();
-    }
+/* ==========================================================
+   APP START
+========================================================== */
 
-    // 6. Bind CTA Interactions & Scroll Animations
-    this.bindEvents();
-    initScrollAnimations();
-  }
+async function initializeApp() {
 
-  hydrateHero() {
-    const badge = $('#hero-badge');
-    const title = $('#hero-title');
-    const subtitle = $('#hero-subtitle');
-    const cta = $('#hero-cta-btn');
+    disableScroll();
 
-    if (badge) badge.textContent = CONFIG.hero.badge;
-    if (title) title.textContent = `${CONFIG.hero.title} ${CONFIG.recipientName}!`;
-    if (subtitle) subtitle.textContent = CONFIG.hero.subtitle;
-    if (cta) cta.textContent = CONFIG.hero.ctaButton;
-  }
+    preloadImages(CONFIG.gallery);
 
-  hydrateStories() {
-    const container = $('#story-container');
-    if (!container || !CONFIG.stories) return;
+    preloadAudio($(SELECTOR.MUSIC));
 
-    container.innerHTML = CONFIG.stories.map((story) => `
-      <article class="story-card">
-        <span class="story-chapter">${story.chapter}</span>
-        <h3 class="story-title">${story.title}</h3>
-        <p class="story-text">${story.text}</p>
-      </article>
-    `).join('');
-  }
+    showLoader();
 
-  setupAudioControls() {
-    const audioBtn = $('#audio-toggle-btn');
-    const mutedIcon = $('.audio-icon-muted', audioBtn);
-    const playingIcon = $('.audio-icon-playing', audioBtn);
+    await delay(1200);
 
-    if (!audioBtn) return;
+    hideLoader();
 
-    audioBtn.addEventListener('click', async () => {
-      if (!this.audioController) return;
-      const isPlaying = await this.audioController.togglePlay();
+    showWelcomeScreen();
 
-      if (isPlaying) {
-        mutedIcon?.classList.add('hidden');
-        playingIcon?.classList.remove('hidden');
-      } else {
-        mutedIcon?.classList.remove('hidden');
-        playingIcon?.classList.add('hidden');
-      }
-    });
-  }
-
-  runLoaderSequence() {
-    const loaderBar = $('#loader-bar-fill');
-    const loaderPercent = $('#loader-percentage');
-    const loaderStatus = $('#loader-status');
-
-    let progress = 0;
-    const phrases = [
-      "Gathering stellar memories...",
-      "Polishing golden sparkles...",
-      "Preparing your gift..."
-    ];
-
-    const interval = setInterval(() => {
-      progress += Math.floor(Math.random() * 12) + 5;
-
-      if (progress >= 30 && progress < 70) {
-        if (loaderStatus) loaderStatus.textContent = phrases[1];
-      } else if (progress >= 70) {
-        if (loaderStatus) loaderStatus.textContent = phrases[2];
-      }
-
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(interval);
-
-        setTimeout(() => {
-          this.hideLoaderAndRevealApp();
-        }, 400);
-      }
-
-      if (loaderBar) loaderBar.style.width = `${progress}%`;
-      if (loaderPercent) loaderPercent.textContent = `${progress}%`;
-    }, 120);
-  }
-
-  hideLoaderAndRevealApp() {
-    const loader = $('#loader');
-    const appMain = $('#app-main');
-
-    if (loader) loader.classList.add('fade-out');
-    if (appMain) appMain.classList.remove('hidden');
-  }
-
-  bindEvents() {
-    const ctaBtn = $('#hero-cta-btn');
-
-    if (ctaBtn) {
-      ctaBtn.addEventListener('click', async () => {
-        if (this.audioController && !this.audioController.isPlaying) {
-          const audioBtn = $('#audio-toggle-btn');
-          const isPlaying = await this.audioController.togglePlay();
-          if (isPlaying && audioBtn) {
-            $('.audio-icon-muted', audioBtn)?.classList.add('hidden');
-            $('.audio-icon-playing', audioBtn)?.classList.remove('hidden');
-          }
-        }
-
-        const storySection = $('#story');
-        if (storySection) {
-          storySection.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    }
-  }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  new App();
-});
+/* ==========================================================
+   WELCOME SCREEN
+========================================================== */
+
+function showWelcomeScreen() {
+
+    const screen = createCard();
+
+    const title = createTitle("SECRET ACCESS");
+
+    const text = createParagraph(
+
+        "এই অভিজ্ঞতাটি শুধুমাত্র একজন বিশেষ মানুষের জন্য তৈরি করা হয়েছে।"
+
+    );
+
+    const button = createButton(
+
+        "চল শুরু করা যাক",
+
+        () => {
+
+            currentQuestion = 0;
+
+            showQuestion();
+
+        }
+
+    );
+
+    screen.append(
+
+        title,
+
+        text,
+
+        button
+
+    );
+
+    renderScreen(screen);
+
+}
+
+/* ==========================================================
+   QUESTION ENGINE
+========================================================== */
+
+function showQuestion() {
+
+    const data = CONFIG.questions[currentQuestion];
+
+    const screen = createCard();
+
+    const progress = createElement("div", {
+
+        className: "progress"
+
+    });
+
+    const fill = createElement("div", {
+
+        className: "progress-fill"
+
+    });
+
+    progress.appendChild(fill);
+
+    setProgress(
+
+        fill,
+
+        currentQuestion + 1,
+
+        CONFIG.questions.length
+
+    );
+
+    const title = createTitle(
+
+        `প্রশ্ন ${currentQuestion + 1}`
+
+    );
+
+    const question = createParagraph(
+
+        data.question
+
+    );
+
+    screen.append(
+
+        progress,
+
+        title,
+
+        question
+
+    );
+
+    if (data.type === "choice") {
+
+        renderChoiceQuestion(
+
+            screen,
+
+            data
+
+        );
+
+    }
+
+    else {
+
+        renderTextQuestion(
+
+            screen,
+
+            data
+
+        );
+
+    }
+
+    renderScreen(screen);
+
+}
+
+/* ==========================================================
+   CHOICE QUESTION
+========================================================== */
+
+function renderChoiceQuestion(
+
+    screen,
+
+    question
+
+) {
+
+    question.options.forEach(option => {
+
+        const button = createButton(
+
+            option,
+
+            () => {
+
+                processAnswer(
+
+                    option,
+
+                    question
+
+                );
+
+            }
+
+        );
+
+        button.classList.add("option");
+
+        screen.appendChild(button);
+
+    });
+
+}
+
+/* ==========================================================
+   TEXT QUESTION
+========================================================== */
+
+function renderTextQuestion(
+
+    screen,
+
+    question
+
+) {
+
+    const input = createInput(
+
+        "তোমার উত্তর লিখো..."
+
+    );
+
+    const button = createButton(
+
+        "পরবর্তী",
+
+        () => {
+
+            processAnswer(
+
+                input.value,
+
+                question
+
+            );
+
+        }
+
+    );
+
+    screen.append(
+
+        input,
+
+        button
+
+    );
+
+}
+/* ==========================================================
+   ANSWER PROCESSOR
+========================================================== */
+
+function processAnswer(userAnswer, question) {
+
+    answers.push(userAnswer);
+
+    if (question.answer === null) {
+
+        nextQuestion();
+
+        return;
+
+    }
+
+    if (isValidAnswer(userAnswer, question.answer)) {
+
+        nextQuestion();
+
+    }
+
+    else {
+
+        showWrongAnswer(question);
+
+    }
+
+}
+
+
+/* ==========================================================
+   WRONG ANSWER
+========================================================== */
+
+function showWrongAnswer(question) {
+
+    const screen = createCard();
+
+    const title = createTitle(
+
+        CONFIG.wrongAnswer.title
+
+    );
+
+    const subtitle = createParagraph(
+
+        CONFIG.wrongAnswer.subtitle
+
+    );
+
+    const reason = createParagraph(
+
+        CONFIG.wrongAnswer.reason
+
+    );
+
+    const button = createButton(
+
+        "আবার চেষ্টা করি",
+
+        () => {
+
+            showQuestion();
+
+        }
+
+    );
+
+    button.classList.add("option");
+
+    screen.append(
+
+        title,
+
+        subtitle,
+
+        reason,
+
+        button
+
+    );
+
+    renderScreen(screen);
+
+}
+
+
+/* ==========================================================
+   NEXT QUESTION
+========================================================== */
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+    saveProgress(currentQuestion);
+
+    if (
+
+        currentQuestion >=
+
+        CONFIG.questions.length
+
+    ) {
+
+        showVerification();
+
+        return;
+
+    }
+
+    showQuestion();
+
+}
+
+
+/* ==========================================================
+   VERIFICATION
+========================================================== */
+
+async function showVerification() {
+
+    const screen = createCard();
+
+    const title = createTitle(
+
+        "যাচাই করা হচ্ছে..."
+
+    );
+
+    const text = createParagraph("");
+
+    screen.append(
+
+        title,
+
+        text
+
+    );
+
+    renderScreen(screen);
+
+    for (
+
+        const line
+
+        of CONFIG.verification
+
+    ) {
+
+        await typeWriter(
+
+            text,
+
+            line
+
+        );
+
+        await delay(900);
+
+    }
+
+    await delay(600);
+
+    showReveal();
+
+}
+
+
+/* ==========================================================
+   REVEAL
+========================================================== */
+
+async function showReveal() {
+
+    const screen = createCard();
+
+    const text = createTitle("");
+
+    screen.append(text);
+
+    renderScreen(screen);
+
+    for (
+
+        const line
+
+        of CONFIG.reveal
+
+    ) {
+
+        await typeWriter(
+
+            text,
+
+            line,
+
+            40
+
+        );
+
+        await delay(1200);
+
+    }
+
+    showBirthday();
+
+}
+/* ==========================================================
+   BIRTHDAY SCREEN
+========================================================== */
+
+function showBirthday() {
+
+    const screen = createCard();
+
+    const title = createTitle(
+
+        CONFIG.birthday.title
+
+    );
+
+    const subtitle = createParagraph(
+
+        CONFIG.birthday.subtitle
+
+    );
+
+    const button = createButton(
+
+        "একটা চিঠি আছে 💚",
+
+        () => {
+
+            showLetter();
+
+        }
+
+    );
+
+    screen.append(
+
+        title,
+
+        subtitle,
+
+        button
+
+    );
+
+    renderScreen(screen);
+
+}
+
+
+/* ==========================================================
+   LETTER SCREEN
+========================================================== */
+
+function showLetter() {
+
+    const screen = createCard();
+
+    const title = createTitle(
+
+        "তোমার জন্য..."
+
+    );
+
+    const letter = createParagraph(
+
+        CONFIG.letter
+
+    );
+
+    const button = createButton(
+
+        "কিছু স্মৃতি দেখি 📸",
+
+        () => {
+
+            showGallery();
+
+        }
+
+    );
+
+    screen.append(
+
+        title,
+
+        letter,
+
+        button
+
+    );
+
+    renderScreen(screen);
+
+}
+
+
+/* ==========================================================
+   GALLERY
+========================================================== */
+
+function showGallery() {
+
+    const screen = createCard();
+
+    const title = createTitle(
+
+        "আমাদের কিছু মুহূর্ত"
+
+    );
+
+    screen.appendChild(title);
+
+    CONFIG.gallery.forEach(src => {
+
+        const image = createElement("img", {
+
+            src
+
+        });
+
+        image.style.width = "100%";
+
+        image.style.borderRadius = "18px";
+
+        image.style.marginBottom = "18px";
+
+        screen.appendChild(image);
+
+    });
+
+    const button = createButton(
+
+        "শেষ বার্তা",
+
+        () => {
+
+            showEnding();
+
+        }
+
+    );
+
+    screen.appendChild(button);
+
+    renderScreen(screen);
+
+}
+
+
+/* ==========================================================
+   ENDING
+========================================================== */
+
+function showEnding() {
+
+    const screen = createCard();
+
+    const title = createTitle(
+
+        "💚"
+
+    );
+
+    const text = createParagraph(
+
+`জীবনে যত দূরেই যাই না কেন,
+
+বন্ধুত্বটা যেন এমনই থেকে যায়।
+
+শুভ জন্মদিন।`
+
+    );
+
+    const button = createButton(
+
+        "আবার শুরু",
+
+        () => {
+
+            currentQuestion = 0;
+
+            answers = [];
+
+            showWelcomeScreen();
+
+        }
+
+    );
+
+    screen.append(
+
+        title,
+
+        text,
+
+        button
+
+    );
+
+    renderScreen(screen);
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */
