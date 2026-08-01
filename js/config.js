@@ -279,13 +279,22 @@ const CONFIG = {
 
     gallery: [
 
-        "assets/images/photo1.jpg",
+    {
+        image: "assets/images/photo1.jpg",
+        caption: "💚"
+    },
 
-        "assets/images/photo2.jpg",
+    {
+        image: "assets/images/photo2.jpg",
+        caption: "💚"
+    },
 
-        "assets/images/photo3.jpg"
+    {
+        image: "assets/images/photo3.jpg",
+        caption: "💚"
+    }
 
-    ],
+],
 
 
 
