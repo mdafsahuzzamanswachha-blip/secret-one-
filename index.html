@@ -1,64 +1,123 @@
 <!DOCTYPE html>
-<html lang="bn">
-
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#09090e" />
+  <title>A Special Birthday Gift ✨</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-    <title>Secret One</title>
-
-    <link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-
 <body>
 
-    <main id="app">
+  <canvas id="ambient-particles" aria-hidden="true"></canvas>
 
-        <!-- Boot Screen -->
-        <section class="screen active" id="boot">
+  <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
-            <h1>গোপন প্রবেশদ্বার</h1>
+  <div id="audio-control-wrapper" class="audio-control-wrapper">
+    <button id="audio-toggle-btn" class="audio-btn" aria-label="Toggle Background Music" type="button">
+      <span class="audio-icon-muted">🔇</span>
+      <span class="audio-icon-playing hidden">🎵</span>
+    </button>
+  </div>
 
-            <p>
-                সিস্টেম চালু করা হচ্ছে...
-            </p>
+  <audio id="bg-music" loop preload="auto"></audio>
 
-        </section>
+  <aside id="loader" class="loader-screen" aria-live="polite">
+    <div class="loader-content">
+      <div class="loader-ring"></div>
+      <p id="loader-status" class="loader-status">Preparing something special...</p>
+      <div class="loader-bar-bg">
+        <div id="loader-bar-fill" class="loader-bar-fill"></div>
+      </div>
+      <span id="loader-percentage" class="loader-percentage">0%</span>
+    </div>
+  </aside>
 
+  <main id="app-main" class="app-main hidden">
 
-        <!-- Welcome Screen -->
-        <section class="screen" id="welcome">
+    <section id="hero" class="section hero-section">
+      <div class="container hero-container">
+        <span id="hero-badge" class="hero-badge"></span>
+        <h1 id="hero-title" class="hero-title"></h1>
+        <p id="hero-subtitle" class="hero-subtitle"></p>
+        <button id="hero-cta-btn" class="btn btn-primary hero-cta" type="button"></button>
+      </div>
+    </section>
 
-            <h1>স্বাগতম</h1>
+    <section id="story" class="section story-section">
+      <div id="story-container" class="container story-container"></div>
+    </section>
 
-            <p>
-                এই অভিজ্ঞতাটি শুধুমাত্র একজন নির্দিষ্ট ব্যক্তির জন্য।
-            </p>
+    <section id="timeline" class="section timeline-section">
+      <div class="container">
+        <h2 id="timeline-heading" class="section-heading"></h2>
+        <div id="timeline-container" class="timeline-container"></div>
+      </div>
+    </section>
 
-            <button id="startBtn">
-                আমি সেই ব্যক্তি
-            </button>
+    <section id="gallery" class="section gallery-section">
+      <div class="container">
+        <h2 id="gallery-heading" class="section-heading"></h2>
+        <div id="gallery-container" class="gallery-grid"></div>
+      </div>
+    </section>
 
-        </section>
+    <section id="celebration" class="section celebration-section">
+      <div class="container celebration-container">
+        <h2 id="celebration-title" class="section-heading"></h2>
+        <p id="celebration-instruction" class="celebration-instruction"></p>
+        <div id="cake-wrapper" class="cake-wrapper" role="button" tabindex="0" aria-label="Tap to blow out candles">
+          <div class="candles-group">
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+          </div>
+          <div class="cake-body"></div>
+        </div>
+        <p id="celebration-wish" class="celebration-wish hidden"></p>
+      </div>
+    </section>
 
+    <section id="letter" class="section letter-section">
+      <div class="container letter-container">
+        <div class="glass-card letter-card">
+          <h2 id="letter-title" class="letter-title"></h2>
+          <p id="letter-greeting" class="letter-greeting"></p>
+          <div id="letter-body" class="letter-body"></div>
+          <div class="letter-footer">
+            <p id="letter-closing" class="letter-closing"></p>
+            <p id="letter-signature" class="letter-signature"></p>
+          </div>
+        </div>
+        <button id="final-surprise-btn" class="btn btn-secondary final-cta" type="button"></button>
+      </div>
+    </section>
 
-        <!-- Question Screen -->
-        <section class="screen" id="question">
+  </main>
 
-        </section>
+  <dialog id="gallery-lightbox" class="lightbox-modal">
+    <button id="lightbox-close" class="lightbox-close-btn" aria-label="Close Lightbox" type="button">&times;</button>
+    <img id="lightbox-img" src="" alt="" />
+    <p id="lightbox-caption" class="lightbox-caption"></p>
+  </dialog>
 
+  <dialog id="final-modal" class="final-modal">
+    <div class="glass-card final-modal-card">
+      <button id="final-modal-close" class="final-modal-close-btn" aria-label="Close Modal" type="button">&times;</button>
+      <blockquote id="final-quote" class="final-quote"></blockquote>
+      <a id="whatsapp-reply-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary whatsapp-btn">
+        Send Thank You Message 💬
+      </a>
+    </div>
+  </dialog>
 
-        <!-- Final Screen -->
-        <section class="screen" id="final">
+  <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
 
-        </section>
-
-    </main>
-
-    <script src="script.js"></script>
-
+  <script type="module" src="js/app.js"></script>
 </body>
-
 </html>
