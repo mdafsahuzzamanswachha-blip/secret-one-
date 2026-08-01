@@ -94,9 +94,9 @@ async function startLetterTyping() {
 
         if (char === "\n") {
 
-            box.innerHTML += "<br><br>";
+    box.innerHTML += "<br>";
 
-        }
+}
 
         else {
 
