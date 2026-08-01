@@ -73,16 +73,14 @@ const CONFIG = {
 
 
         {
+    id: 2,
 
-            id: 2,
+    type: "text",
 
-            type: "text",
+    question: "তোমার পুরো নাম কী?",
 
-            question: "তোমার পুরো নাম কী?",
-
-            answer: "পূর্ণ নাম এখানে লিখবে"
-
-        },
+    answer: null
+},
 
 
 
