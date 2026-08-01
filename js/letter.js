@@ -55,7 +55,7 @@ function createLetterScreen() {
     const button = createButton(
         "📸 এবার কিছু স্মৃতি দেখা যাক",
         () => {
-            createGalleryScreen();
+            showGalleryScreen();
         }
     );
 
