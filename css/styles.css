@@ -493,8 +493,6 @@ input:focus{
 
     color:#f4f4f4;
 
-    white-space:pre-wrap;
-
     overflow-wrap:break-word;
 
     overflow-y:auto;
