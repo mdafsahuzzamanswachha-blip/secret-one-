@@ -324,9 +324,14 @@ function createTextQuestion(
 
 function submitAnswer(userAnswer, question) {
 
+    console.log("Question =", question);
+    console.log("Answer =", question.answer);
+
     AppState.answers[AppState.currentQuestion] = userAnswer;
 
     if (question.answer === null) {
+
+        alert("NULL WORKING");
 
         nextQuestion();
 
