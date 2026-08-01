@@ -31,15 +31,32 @@ function renderGallery() {
     const title = createTitle("📸 আমাদের কিছু স্মৃতি");
 
     const image = createElement("img", {
-
         src: CONFIG.gallery[galleryIndex].image
-
     });
-    const caption = createParagraph(
 
-    CONFIG.gallery[galleryIndex].caption
+    image.className = "gallery-image";
+
+    const caption = createParagraph(
+        CONFIG.gallery[galleryIndex].caption
+    );
+
+    caption.className = "gallery-caption";
+
+    image.style.width = "100%";
+    image.style.borderRadius = "20px";
+    image.style.objectFit = "cover";
+    image.style.margin = "15px 0";
+
+    fadeInElement(image);
+
+    const counter = createParagraph(
+
+        `${galleryIndex + 1} / ${CONFIG.gallery.length}`
 
     );
+
+    // বাকি Code যেমন আছে তেমনই থাকবে...
+}
 
     image.style.width = "100%";
     image.style.borderRadius = "20px";
