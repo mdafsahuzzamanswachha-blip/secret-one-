@@ -36,12 +36,6 @@ function renderGallery() {
 
     image.className = "gallery-image";
 
-    const caption = createParagraph(
-        CONFIG.gallery[galleryIndex].caption
-    );
-
-    caption.className = "gallery-caption";
-
     image.style.width = "100%";
     image.style.borderRadius = "20px";
     image.style.objectFit = "cover";
@@ -49,84 +43,68 @@ function renderGallery() {
 
     fadeInElement(image);
 
-    const counter = createParagraph(
-
-        `${galleryIndex + 1} / ${CONFIG.gallery.length}`
-
+    const caption = createParagraph(
+        CONFIG.gallery[galleryIndex].caption
     );
 
-  image.style.width = "100%";
-image.style.borderRadius = "20px";
-image.style.objectFit = "cover";
-image.style.margin = "15px 0";
+    caption.className = "gallery-caption";
 
-fadeInElement(image);
+    const counter = createParagraph(
+        `${galleryIndex + 1} / ${CONFIG.gallery.length}`
+    );
 
-const counter = createParagraph(
+    const controls = createElement("div");
 
-    `${galleryIndex + 1} / ${CONFIG.gallery.length}`
+    controls.style.display = "flex";
+    controls.style.gap = "12px";
+    controls.style.width = "100%";
 
-);
+    const previousButton = createButton(
+        "⬅ আগেরটি",
+        previousImage
+    );
 
-const controls = createElement("div");
+    const nextButton = createButton(
 
-controls.style.display = "flex";
-controls.style.gap = "12px";
-controls.style.width = "100%";
+        galleryIndex === CONFIG.gallery.length - 1
+            ? "🎉 শেষ চমক দেখা যাক"
+            : "পরেরটি ➜",
 
-const previousButton = createButton(
+        () => {
 
-    "⬅ আগেরটি",
+            if (galleryIndex === CONFIG.gallery.length - 1) {
 
-    previousImage
+                finishExperience();
+                return;
 
-);
+            }
 
-const nextButton = createButton(
-
-    galleryIndex === CONFIG.gallery.length - 1
-        ? "🎉 শেষ চমক দেখা যাক"
-        : "পরেরটি ➜",
-
-    () => {
-
-        if (galleryIndex === CONFIG.gallery.length - 1) {
-
-            finishExperience();
-            return;
+            nextImage();
 
         }
 
-        nextImage();
+    );
+
+    controls.append(
+        previousButton,
+        nextButton
+    );
+
+    if (galleryIndex === 0) {
+
+        previousButton.disabled = true;
 
     }
 
-);
+    screen.append(
+        title,
+        image,
+        caption,
+        counter,
+        controls
+    );
 
-controls.append(
-
-    previousButton,
-    nextButton
-
-);
-
-if (galleryIndex === 0) {
-
-    previousButton.disabled = true;
-
-}
-
-screen.append(
-
-    title,
-    image,
-    caption,
-    counter,
-    controls
-
-);
-
-renderScreen(screen);
+    renderScreen(screen);
 
 }
 
