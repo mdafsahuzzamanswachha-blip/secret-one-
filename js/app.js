@@ -428,9 +428,9 @@ function nextQuestion() {
 
     ) {
 
-        startVerification();
+        createLetterScreen();
 
-        return;
+return;
 
     }
 
