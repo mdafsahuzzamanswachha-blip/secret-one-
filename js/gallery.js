@@ -32,9 +32,14 @@ function renderGallery() {
 
     const image = createElement("img", {
 
-        src: CONFIG.gallery[galleryIndex]
+        src: CONFIG.gallery[galleryIndex].image
 
     });
+    const caption = createParagraph(
+
+    CONFIG.gallery[galleryIndex].caption
+
+    );
 
     image.style.width = "100%";
     image.style.borderRadius = "20px";
@@ -112,6 +117,8 @@ function renderGallery() {
         title,
 
         image,
+
+        caption,
 
         counter,
 
