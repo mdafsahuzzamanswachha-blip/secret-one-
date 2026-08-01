@@ -168,10 +168,6 @@ button {
   font-weight: 600;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
 /* ==========================================
  * 🚪 HERO SECTION STYLES
  * ========================================== */
@@ -297,6 +293,80 @@ button {
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
+/* ==========================================
+ * 📖 STORY CHAPTER STREAM STYLES
+ * ========================================== */
+.story-section {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+.story-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 720px;
+}
+
+.story-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--card-blur));
+  -webkit-backdrop-filter: blur(var(--card-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+@media (hover: hover) {
+  .story-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(244, 196, 104, 0.4);
+  }
+}
+
+.story-chapter {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+.story-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  color: var(--color-text-main);
+  line-height: 1.25;
+}
+
+.story-text {
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* ==========================================
+ * ✨ SCROLL REVEAL ANIMATION CLASSES
+ * ========================================== */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation Keyframes */
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
