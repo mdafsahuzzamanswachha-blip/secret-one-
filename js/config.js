@@ -1,62 +1,323 @@
-/**
- * Global Configuration & Content Data Object
- * @module config
- */
+/*
+==========================================================
+SECRET ONE
+Central Configuration File
+Everything can be customized from here.
+==========================================================
+*/
 
 const CONFIG = {
-  // Recipient details
-  recipientName: "Bestie",
-  
-  // Theme styling overrides
-  theme: {
-    colorPrimary: "#f4c468",
-    colorSecondary: "#ff7597",
-    colorBg: "#09090e",
-    colorSurface: "#121120",
-    fontHeading: "'Playfair Display', Georgia, serif",
-    fontBody: "'Plus Jakarta Sans', sans-serif"
-  },
 
-  // App feature flags
-  settings: {
-    enableParticles: true,
-    enableMusic: true,
-    enableLoader: true
-  },
+    /*
+    ======================================================
+    Friend Information
+    ======================================================
+    */
 
-  // Background audio settings
-  music: {
-    audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-piano-10781.mp3",
-    volume: 0.5,
-    syncWithAnimations: true
-  },
+    friend: {
 
-  // Hero section configuration
-  hero: {
-    badge: "✨ Special Day",
-    title: "Happy Birthday,",
-    subtitle: "A modest space crafted specially for you to celebrate another beautiful year around the sun.",
-    ctaButton: "Begin Experience ✨"
-  },
+        fullName: "পূর্ণ নাম এখানে লিখবে",
 
-  // Story chapters
-  stories: [
-    {
-      chapter: "Chapter I",
-      title: "The Beginning",
-      text: "Every great journey starts with a simple moment that changes everything forever."
+        nickName: "Upomaa"
+
     },
-    {
-      chapter: "Chapter II",
-      title: "Unforgettable Memories",
-      text: "Through every laugh, late-night chat, and shared dream, these moments became priceless."
+
+
+
+    /*
+    ======================================================
+    Website Information
+    ======================================================
+    */
+
+    site: {
+
+        title: "Secret One",
+
+        language: "bn",
+
+        version: "1.0.0"
+
     },
-    {
-      chapter: "Chapter III",
-      title: "Looking Ahead",
-      text: "May the upcoming year bring even more joy, endless success, and magic into your life."
+
+
+
+    /*
+    ======================================================
+    Questions
+    ======================================================
+    */
+
+    questions: [
+
+        {
+
+            id: 1,
+
+            type: "choice",
+
+            question: "আমি তোমাকে কোন নামে ডাকি?",
+
+            options: [
+
+                "Upomaa",
+
+                "Kripita"
+
+            ],
+
+            answer: "Upomaa"
+
+        },
+
+
+
+        {
+
+            id: 2,
+
+            type: "text",
+
+            question: "তোমার পুরো নাম কী?",
+
+            answer: "পূর্ণ নাম এখানে লিখবে"
+
+        },
+
+
+
+        {
+
+            id: 3,
+
+            type: "choice",
+
+            question: "আমাদের বন্ধুত্ব শুরু হয়েছিল কোন বছরে?",
+
+            options: [
+
+                "2007",
+
+                "2023"
+
+            ],
+
+            answer: "2023"
+
+        },
+
+
+
+        {
+
+            id: 4,
+
+            type: "choice",
+
+            question: "আমাদের মধ্যে সবচেয়ে বেশি রাগ করে কে?",
+
+            options: [
+
+                "আমি",
+
+                "তুই",
+
+                "দুজনেই"
+
+            ],
+
+            answer: null
+
+        },
+
+
+
+        {
+
+            id: 5,
+
+            type: "choice",
+
+            question: "আমার প্রিয় ফুটবল দল কোনটি?",
+
+            options: [
+
+                "Argentina",
+
+                "Brazil"
+
+            ],
+
+            answer: "Argentina"
+
+        }
+
+    ],
+
+
+
+
+    /*
+    ======================================================
+    Wrong Answer Message
+    ======================================================
+    */
+
+    wrongAnswer: {
+
+        title: "❌ উত্তর পুরোপুরি মেলেনি",
+
+        subtitle: "তবুও তোমাকে একটা সুযোগ দেওয়া হচ্ছে...",
+
+        reason: "কারণ তুমি বিশেষ একজন।"
+
+    },
+
+
+
+
+    /*
+    ======================================================
+    Verification Screen
+    ======================================================
+    */
+
+    verification: [
+
+        "পরিচয় যাচাই করা হচ্ছে...",
+
+        "পুরোনো স্মৃতি খোঁজা হচ্ছে...",
+
+        "বন্ধুত্ব বিশ্লেষণ করা হচ্ছে...",
+
+        "একটি বিশেষ বার্তা পাওয়া গেছে..."
+
+    ],
+
+
+
+
+    /*
+    ======================================================
+    Reveal Screen
+    ======================================================
+    */
+
+    reveal: [
+
+        "স্বাগতম...",
+
+        "আজকের দিনটা অন্য সব দিনের মতো নয়।",
+
+        "কারণ...",
+
+        "আজ তোমার জন্মদিন।"
+
+    ],
+
+
+
+
+    /*
+    ======================================================
+    Birthday Screen
+    ======================================================
+    */
+
+    birthday: {
+
+        title: "🎉 শুভ জন্মদিন 🎉",
+
+        subtitle: "তোমার জীবনের প্রতিটি দিন সুন্দর হোক।"
+
+    },
+
+
+
+
+    /*
+    ======================================================
+    Personal Letter
+    ======================================================
+    */
+
+    letter: `
+
+প্রিয় বন্ধু,
+
+এই অংশে পুরো চিঠি থাকবে।
+
+পরে আমরা সুন্দরভাবে সম্পূর্ণ Letter লিখব।
+
+আজ শুধু Structure তৈরি করছি।
+
+    `,
+
+
+
+
+
+    /*
+    ======================================================
+    Gallery Images
+    ======================================================
+    */
+
+    gallery: [
+
+        "assets/images/photo1.jpg",
+
+        "assets/images/photo2.jpg",
+
+        "assets/images/photo3.jpg"
+
+    ],
+
+
+
+
+
+    /*
+    ======================================================
+    Music
+    ======================================================
+    */
+
+    audio: {
+
+        autoplay: false,
+
+        loop: true,
+
+        volume: 0.60,
+
+        source: "assets/audio/background.mp3"
+
+    },
+
+
+
+
+
+
+    /*
+    ======================================================
+    Animation
+    ======================================================
+    */
+
+    animation: {
+
+        typingSpeed: 45,
+
+        fadeDuration: 500,
+
+        screenDelay: 2000,
+
+        celebrationDuration: 5000
+
     }
-  ]
+
 };
 
-export default CONFIG;
+Object.freeze(CONFIG);
