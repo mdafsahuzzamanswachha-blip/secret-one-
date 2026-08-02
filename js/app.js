@@ -581,24 +581,9 @@ function fallbackBirthday() {
 
 function openLetter() {
 
-    if (
-
-        typeof showLetterScreen ===
-
-        "function"
-
-    ) {
-
-        showLetterScreen();
-
-        return;
-
-    }
-
-    fallbackLetter();
+    createLetterScreen();
 
 }
-
 
 /* ==========================================================
    FALLBACK LETTER
