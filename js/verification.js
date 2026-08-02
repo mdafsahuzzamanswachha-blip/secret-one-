@@ -5,7 +5,7 @@
 ========================================================== */
 
 async function showVerificationScreen() {
-
+    alert("Verification Started");
     const screen = createCard();
 
     const title = createTitle("🔒 পরিচয় নিশ্চিত করা হচ্ছে...");
