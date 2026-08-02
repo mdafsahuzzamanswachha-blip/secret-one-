@@ -23,7 +23,8 @@ body{
     font-family:'Poppins',sans-serif;
     background:#050505;
     color:#ffffff;
-    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:auto;
 }
 
 /* ---------- VARIABLES ---------- */
@@ -65,11 +66,13 @@ body{
 
     justify-content:center;
 
-    align-items:center;
+    align-items:flex-start;
 
     position:relative;
 
-    overflow:hidden;
+    overflow-y:auto;
+
+    overflow-x:hidden;
 
     padding:22px;
 
@@ -274,7 +277,7 @@ input:focus{
     padding:24px;
 
     border-radius:22px;
-   
+
     max-height:90vh;
 
     overflow-y:auto;
