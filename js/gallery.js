@@ -41,7 +41,15 @@ function renderGallery() {
     image.style.objectFit = "cover";
     image.style.margin = "15px 0";
 
-    fadeInElement(image);
+    image.classList.add("fade-out");
+
+    setTimeout(() => {
+
+    image.classList.remove("fade-out");
+
+    image.classList.add("fade-in");
+
+    }, 30);
 
     const caption = createParagraph(
         CONFIG.gallery[galleryIndex].caption
