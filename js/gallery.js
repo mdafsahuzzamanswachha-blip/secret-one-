@@ -28,7 +28,7 @@ function renderGallery() {
 
     const screen = createCard();
 
-    const title = createTitle("📸 আমাদের কিছু স্মৃতি");
+    const title = createTitle(" 🌿 কিছু ছবি, অনেক গল্প");
 
     const image = createElement("img", {
         src: CONFIG.gallery[galleryIndex].image
