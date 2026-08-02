@@ -212,42 +212,66 @@ function showFinalEnding() {
 
     const screen = createCard();
 
+    const emoji = createElement("h1", {
+
+        text: "🎉🎂💚"
+
+    });
+
     const title = createTitle(
 
-        "THE END 💚"
+        "শুভ জন্মদিন, বিথী! 💚"
 
     );
 
     const text = createParagraph(
 
-`শুভ জন্মদিন।
+`আজকের এই ছোট্ট ওয়েবসাইটটা শুধু তোর জন্যই বানানো।
 
-তোমার প্রতিটি স্বপ্ন পূরণ হোক।
+হয়তো এটা পৃথিবীর সবচেয়ে বড় উপহার না,
+কিন্তু এর প্রতিটা লাইন, প্রতিটা ক্লিক আর প্রতিটা মুহূর্ত অনেক যত্ন নিয়ে বানানো।
 
-ভালো থেকো সবসময়।`
+আশা করি পুরো জার্নিটা তোর ভালো লেগেছে, আর তোর মুখে অন্তত একটা হাসি আনতে পেরেছি।
+
+সৃষ্টিকর্তা যেন তোকে সবসময় ভালো রাখেন, সুস্থ রাখেন, আর তোর জীবনের প্রতিটা স্বপ্ন পূরণ করেন।
+
+আবারও...
+
+🎉 শুভ জন্মদিন, বিথী। 💚`
 
     );
 
     const credit = createParagraph(
 
-        "Made with 💚\nfor only one person."
+        "Made with 💚 by Swachha"
+
+    );
+
+    const replayButton = createButton(
+
+        "🔄 আবার শুরু করি",
+
+        () => {
+
+            location.reload();
+
+        }
 
     );
 
     screen.append(
 
+        emoji,
         title,
-
         text,
-
-        credit
+        credit,
+        replayButton
 
     );
 
     renderScreen(screen);
 
 }
-
 
 /* ==========================================================
    END
