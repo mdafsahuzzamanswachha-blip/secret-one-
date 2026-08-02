@@ -292,6 +292,36 @@ const CONFIG = {
     {
         image: "assets/images/photo3.jpg",
         caption: "💚"
+    },
+
+    {
+        image: "assets/images/photo4.jpg",
+        caption: "💚"
+    },
+
+    {
+        image: "assets/images/photo5.jpg",
+        caption: "💚"
+    },
+
+    {
+        image: "assets/images/photo6.jpg",
+        caption: "💚"
+    },
+
+    {
+        image: "assets/images/photo7.jpg",
+        caption: "💚"
+    },
+
+    {
+        image: "assets/images/photo8.jpg",
+        caption: "💚"
+    },
+
+    {
+        image: "assets/images/photo9.jpg",
+        caption: "💚"
     }
 
 ],
