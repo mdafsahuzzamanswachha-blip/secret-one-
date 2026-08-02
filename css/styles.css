@@ -572,34 +572,18 @@ input:focus{
 
     max-width:700px;
 
+    max-height:55vh;
+
     display:block;
 
     margin:20px auto;
 
     border-radius:20px;
 
-    object-fit:cover;
+    object-fit:contain;
 
     box-shadow:0 10px 30px rgba(0,0,0,.25);
 
     transition:.3s;
-
-}
-
-.gallery-caption{
-
-    text-align:center;
-
-    font-size:18px;
-
-    color:#ffffff;
-
-    margin-bottom:15px;
-
-}
-
-.gallery-image:hover{
-
-    transform:scale(1.02);
 
 }
