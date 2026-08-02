@@ -50,3 +50,47 @@ async function showVerificationScreen() {
     showVerificationSuccess();
 
 }
+
+/* ==========================================================
+   VERIFICATION SUCCESS
+========================================================== */
+
+async function showVerificationSuccess() {
+
+    const screen = createCard();
+
+    const title = createTitle("💚 পরিচয় নিশ্চিত হয়েছে");
+
+    const text = createParagraph(
+`স্বাগতম, বিথী।
+
+এই ওয়েবসাইটের প্রতিটি অংশ,
+প্রতিটি শব্দ,
+আর প্রতিটি স্মৃতি...
+
+শুধু তোমার জন্য তৈরি করা হয়েছে।`
+    );
+
+    const button = createButton(
+
+        "💌 চিঠি খুলে দেখি",
+
+        () => {
+
+            showLetterScreen();
+
+        }
+
+    );
+
+    screen.append(
+
+        title,
+        text,
+        button
+
+    );
+
+    renderScreen(screen);
+
+}
