@@ -428,7 +428,7 @@ function nextQuestion() {
 
     ) {
 
-        createLetterScreen();
+        startVerification();
 
 return;
 
