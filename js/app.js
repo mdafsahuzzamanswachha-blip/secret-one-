@@ -445,15 +445,7 @@ return;
 
 function startVerification() {
 
-    if (typeof showVerification === "function") {
-
-        showVerification();
-
-        return;
-
-    }
-
-    fallbackVerification();
+    showVerificationScreen();
 
 }
 
