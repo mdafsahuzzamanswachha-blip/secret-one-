@@ -587,3 +587,33 @@ input:focus{
     transition:.3s;
 
 }
+
+/* ==========================================================
+   GALLERY IMAGE ANIMATION
+========================================================== */
+
+.gallery-image{
+
+    opacity:1;
+
+    transition:
+        opacity .45s ease,
+        transform .45s ease;
+
+}
+
+.gallery-image.fade-out{
+
+    opacity:0;
+
+    transform:scale(.97);
+
+}
+
+.gallery-image.fade-in{
+
+    opacity:1;
+
+    transform:scale(1);
+
+}
