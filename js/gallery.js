@@ -75,7 +75,7 @@ function renderGallery() {
     const nextButton = createButton(
 
         galleryIndex === CONFIG.gallery.length - 1
-            ? "🎉 শেষ চমক দেখা যাক"
+            ? "✨ এখনও একটা বাকি আছে..."
             : "পরেরটি ➜",
 
         () => {
