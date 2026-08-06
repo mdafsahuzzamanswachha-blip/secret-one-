@@ -70,6 +70,10 @@ function createLetterScreen() {
 
     renderScreen(screen);
 
+    setTimeout(() => {
+        fadeInMusic(3000);
+    }, 2000);
+
     startLetterTyping();
 
 }
