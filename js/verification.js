@@ -5,12 +5,15 @@
 ========================================================== */
 
 async function showVerificationScreen() {
-    
+
     const screen = createCard();
 
     const title = createTitle("🔒 পরিচয় নিশ্চিত করা হচ্ছে...");
 
-    const status = createParagraph("প্রশ্নগুলোর উত্তর মিলিয়ে দেখা হচ্ছে...");
+    const status = createParagraph("🔍 স্মৃতির সাথে মিলিয়ে দেখা হচ্ছে...");
+
+    const percent = createParagraph("0%");
+    percent.className = "verification-percent";
 
     const progress = createElement("div", {
         className: "verification-progress"
@@ -25,25 +28,35 @@ async function showVerificationScreen() {
     screen.append(
         title,
         status,
-        progress
+        progress,
+        percent
     );
 
     renderScreen(screen);
 
-    await delay(1200);
+    /* ---------- STEP 1 ---------- */
 
-    status.textContent = "✓ প্রশ্নগুলোর উত্তর মিলেছে।";
+    await delay(1000);
+
+    status.textContent = "✓ প্রশ্নগুলোর উত্তর মিলেছে";
     bar.style.width = "33%";
+    percent.textContent = "33%";
 
-    await delay(1000);
+    /* ---------- STEP 2 ---------- */
 
-    status.textContent = "✓ স্মৃতিগুলো যাচাই করা হচ্ছে...";
+    await delay(1100);
+
+    status.textContent = "🧠 স্মৃতিগুলো যাচাই করা হচ্ছে...";
     bar.style.width = "66%";
+    percent.textContent = "66%";
 
-    await delay(1000);
+    /* ---------- STEP 3 ---------- */
 
-    status.textContent = "✓ পরিচয় নিশ্চিত করা হচ্ছে...";
+    await delay(1100);
+
+    status.textContent = "💚 পরিচয় নিশ্চিত করা হচ্ছে...";
     bar.style.width = "100%";
+    percent.textContent = "100%";
 
     await delay(1200);
 
